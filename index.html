@@ -1,0 +1,1508 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<title>Encapsulated UI - Inner HTML/CSS/JS</title>
+
+<style>
+
+
+  /* ===== MAKE ALL TEXT STATIC / UNSELECTABLE ===== */
+  * {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+
+
+  /* ===== PAGE ===== */
+  .bodyothers {
+    /* margin: 0; */
+    height: 100vh;
+    display:flex;
+    justify-content: center;
+    /* align-items: center;  */
+    background-color: blue;
+    overflow: hidden;
+  }
+
+  /* ===== CONTAINER ===== */
+  .container {
+    overflow: hidden;
+    display:flex;
+    flex-direction: column;
+    align-items:center;
+    gap: 30px;
+    background: aqua;
+    border-radius: 2pc;
+    width: 90%;
+    height: 95vh;
+    padding-top: 20px;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  /* ===== GRID / CELL ===== */
+  ul.grid {
+    display: grid;
+    grid-template-columns: repeat(5, 80px);
+    gap: 0;
+    border: 2px solid aqua;
+    border-radius: 12px;
+    overflow: hidden;
+    margin: auto;
+    padding: 0;
+  
+  }
+  
+
+  .cell {
+      /* width: 80px; */
+  /* text-align: ; */
+    height: 20px;
+    border: 1px solid wheat;
+    background: wheat;
+    display:block;
+    justify-content: center;
+    align-items: center;
+    color: green;
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .cell:hover {
+    color: rgb(22, 3, 3);
+  }
+
+  .topicons .cell {
+    background:wheat;
+    border-color:wheat;
+  }
+
+  /* ===== SIDE NAV ===== */
+  .sidenav {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    background-color:aqua;
+    overflow: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+  }
+
+  .sidenav a, .sidenav li {
+    padding: 8px 32px;
+    font-size: 25px;
+    color: purple;
+    text-decoration: none;
+    display: block;
+  }
+
+  .sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+  }
+
+  .openbtn {
+    font-size: 30px;
+    cursor: pointer;
+    color: red;
+  }
+
+  /* ===== FOOTER ===== */
+  .list-parent {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    width: 80%;
+    height:8vh;
+    transform: translateY(-40%);
+    padding: 10px;
+    border-radius: 10px;
+  }
+
+  .list-parent li {
+    list-style: none;
+    padding: 6px 10px;
+    color: black;
+    font-size: 14px;
+    cursor: pointer;
+  }
+
+  .list-parent li:hover{
+background:gray;
+  }
+  /* ===== INFO SECTIONS ===== */
+  .services, .usdtinfo{
+    width: 90%;
+    display:block;
+    justify-content: center;
+    margin: 0 auto;
+  }
+
+  .services .cell {
+    width: 100%;
+  }
+  a{
+    height: 4vh;
+  }
+  .openbtn ,a:hover{
+    color:hotpink;
+  }
+  .btcinfo{
+    
+    text-indent: 60px;
+transform: translateX(-70%);    
+  }
+
+ 
+/* All submenu */
+  .DropDownMenu {
+  display:none;
+    height: 50%;
+    width: 160px;
+    position:fixed;
+    z-index: 2;
+ top:16%;
+    left:20%;
+    /* transactions details */
+    /* top:16%;
+    left:20%; */
+
+    /* data & card */
+    /* top:41%;
+    left:23%; */
+
+    /* gift card & convert */
+    /* left:30%; 
+    top:28%; */
+    background-color:white;
+    /* overflow: hidden; */
+    transition: 0.5s;
+    padding-top: 60px;
+  
+        box-shadow: 0 0 8px #0005;
+    overflow-y: auto;         /* SCROLL UP/DOWN */
+    max-height: 180px;        /* LIMIT HEIGHT */
+    scroll-behavior: smooth;  /* SMOOTH SCROLL */
+    z-index: 20;
+  }
+
+  .DropDownMenu a{
+    padding: 8px 32px;
+    font-size: 25px;
+    color: purple;
+    text-decoration: none;
+    display: block;
+
+  }
+
+  /* Scrollbar style (optional) */
+ .DropDownMenu::-webkit-scrollbar {
+    width: 6px;
+  }
+   .DropDownMenu::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+  }
+ .DropDownMenu::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+
+ 
+   .DropDownMenu a:hover {
+    background: #eee;
+  }
+
+a{
+text-align: center;
+}
+
+/*buying data or recharge card */
+    .moredatacarddiv {
+      width: 300px;
+      padding: 20px;
+      text-align: center;
+      background-color: #4CAF50;
+      color: white;
+      border-radius: 10px;
+      margin: auto; /* works for horizontal centering if flex isn't used */
+    }
+  .btn{
+    transform:translateY(100%);
+  }
+  .btn:hover{
+    background:gray;
+    color:pink;
+  }
+
+    /* Chrome, Safari, Edge, Opera input type =number, arrow disabled*/
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    /* Firefox  input type =number, arrow disabled*/
+    input[type=number] {
+      -moz-appearance: textfield;
+    }
+
+
+
+
+    /* Exchange css section */
+    .swap-box {
+      width: 300px;
+      height: 100vh;
+      background: blue;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      margin: auto;
+       
+      /* CENTER HORIZONTALLY */
+               /* Space from top */
+      overflow: hidden;
+    }
+
+    /* Horizontal Year Bar */
+    .year-bar {
+      display: flex;
+      justify-content: space-between;
+      background: #fff; 
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      margin-bottom: 10px;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    /* Blinking welcome text */
+    .welcome-text {
+      background: white;
+      padding: 10px;
+      text-align: center;
+      border-radius: 6px;
+      color: aqua;
+      margin-bottom: 15px;
+      font-size: 14px;
+      border: 1px solid #ddd;
+      /* animation: blink 1.8s infinite; */
+    }
+   
+
+    /* @keyframes blink {
+      0% { color:black; }
+      50% { color: blue; }
+      60% { background:aqua; }
+      100% { color:green; }
+    } */
+
+
+/* btc @ current year identify */
+.traficating{
+     animation: trafick 1.8s infinite;
+   
+} 
+@keyframes trafick {
+      0% { color:black; }
+      50% { color: blue; }
+      60% { background:aqua; }
+      100% { color:green; }
+    }
+
+    /* Container for stats + inputs */
+    .content-row {
+      display: flex;
+      gap: 20px;
+    }
+
+    /* Stats Box (Left side) */
+    .stats-box {
+      margin: auto;
+      display:block;
+      flex-direction: column;
+      background: #f9f9f9;
+      padding: 15px;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      width: 150px;
+      font-size: 14px;
+    }
+
+    .stats-box div { margin-bottom: 10px; }
+    .stats-box strong { display: block; margin-bottom: 3px; }
+
+    /* Inputs Right Side */
+    .swap-inputs {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .swap-inputs h2 {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .input-group label {
+      display: block;
+      font-size: 14px;
+      margin-bottom: 5px;
+      color: white;
+    }
+
+    .input-group .inputswap, 
+    .input-group select {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    .swap-btn {
+      width: 100%;
+      padding: 12px;
+      background: #ffb200;
+      border: none;
+      font-size: 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .swap-btn:hover {
+      background: #e09c00;
+    }
+
+    .bodyexchange{
+      font-family: Arial, sans-serif;
+      background: blue;
+      margin: 0;
+      overflow:hidden;
+      height: 100vh;
+      display: block;
+    }
+
+
+
+/* gift cards @ below */
+    .giftcarddiv{
+      width: 200px;
+      padding: 20px;
+      text-align: center;
+      background-color: #4CAF50;
+      color: white;
+      border-radius: 10px;
+      margin: auto; /* works for horizontal centering if flex isn't used */
+    }
+
+    .signup-box h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+
+    .input-group label {
+      display: block;
+      font-size: 14px;
+      margin-bottom:5px;
+      font-weight: bold;
+      color:aqua;
+    }
+
+    .input-group input,
+    .input-group select {
+      width: 80%;
+      height:1vh;
+      padding: 10px;
+      border-radius: 5px;
+      font-size: 15px;
+      border: 1px solid #ccc;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 12px;
+      background: #ffb200;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 17px;
+      transition: 0.3s;
+      
+    }
+
+    .btn:hover {
+      background:purple;
+      color: black;
+    
+    }
+li{
+  list-style-type:none;
+}
+
+
+   /* exchange btn */
+.footer2:hover{
+background:gray;
+color: blue;
+cursor:pointer;
+}
+
+.Sub_menu:hover{
+ background: #555;
+ cursor: pointer;
+ color: black;
+}
+p{
+  font-size: medium;
+  color: purple;
+}
+
+
+/* chart  */
+ .chart {
+      background: white;
+      padding: 10px;
+      text-align: center;
+      border-radius: 6px;
+      color: aqua;
+      margin-bottom: 15px;
+      font-size: 14px;
+      border: 1px solid #ddd;
+      animation: blink 1.8s infinite;
+    }
+
+
+/* .DropDownex a{
+
+   padding: 8px 32px;
+    font-size: 25px;
+    color: purple;
+    text-decoration: none;
+    display: block;
+
+} 
+
+#excmenu{
+
+} */
+</style>
+</head>
+
+<body>
+
+
+  </body>
+<body id="AllTagsContent">
+<!-- giftcards @ below -->
+  <div class="giftcarddiv" style="display: none;">
+  
+  <h2>Create Account you are welcome</h2>
+
+  <div class="input-group">
+    <label>Username</label>
+    <input type="text" id="username">
+  </div>
+
+  <div class="input-group">
+    <label>Surname</label>
+    <input type="text" id="surname">
+  </div>
+
+  <div class="input-group">
+    <label>Last Name</label>
+    
+    <input type="text" id="lastname">
+  </div>
+
+  <div class="input-group">
+    <label>Phone Number</label>
+    <input type="number" id="phone">
+  </div>
+
+  <div class="input-group" style="display: non;">
+    <label>Country Code</label>
+    <input type="number" id="countryCode" placeholder="+234">
+  </div>
+
+  <div class="input-group" style="display: non;">
+    <label>Email Address</label>
+    <input type="text" id="email">
+  </div>
+
+  <button class="btn" onclick="submitForm()">Create Account</button>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+     <button onclick="navback()" class="navback" style="width: 30%; background:purple; cursor: pointer;">&#9664;</button>
+  
+  </div>
+
+
+
+<!-- below are Exchange html code -->
+<div  class="swap-box ">
+
+<!-- btc 'having' 4 years circle @ 0 to 3 -->
+  <div class='year-bar' >
+     <div class="Year0" >Year1</div>
+    <div class="Year1">Year2</div>
+    <div  class="Year2" style='' >Year3</div>
+    
+    <div class="Year3" > Year3</div>
+   
+<!--<div class="Year3 BtcHavingIdentify " > Year3<li class='BtcHavingIdentify' style='height:1vh; text-align:left;'>⏏</li></div>-->
+  </div>
+<!-- btc 'having' 4 years circle 0 to 3 end-->
+
+  <!-- Blinking welcome message -->
+   
+  <div class="welcome-text traficating"  >
+    Welcome back our dear user, hope the application has served you better.
+  </div>
+  <!-- swap-box && display  exchange status box -->
+<span class="swapAndStatus_box"  >  
+  <!-- Stats & Inputs -->
+  <div class="content-row">
+    <!-- Vertical Stats -->
+    <div class="stats-box" style="height: 59vh;">
+     
+      <div><strong style="text-decoration: underline; color:green;">Sell Off Price</strong><span id="selloff"> -- <br> --</span></div>
+        <div><strong style="text-decoration: underline; color: darkmagenta;" class="LastHavingPriceHight">2025 BTC High @</strong><span id="lastendedHighestprice">--</span></div>     
+      <div><strong style="text-decoration: underline; color: darkmagenta;" class="LastHavingPriceLow">2023 BTC Low @</strong><span id="lastendlowprice">--</span></div>
+              <div><strong style="text-decoration:underline; color:darkmagenta" class="CurrentHavingPickReached">Now BTC High @</strong><span id="nowhighprice">--</span></div>
+             <div><strong style="color:saddlebrown;">BTC</strong><span id="high">--</span></div> 
+            <div><strong style="color:saddlebrown;">USD</strong><span id="high">--</span></div>
+            <div><strong style="color:saddlebrown;" >SOL</strong><span id="high">--</span></div>
+            <!-- <div><strong style="color:saddlebrown;" ></strong><span id="high"></span></div> 
+   -->
+ 
+          </div>
+
+    <!-- Swap Inputs -->
+    <div class="swap-inputs" >
+      <h2 style="color:yellow;">BTC/USD</h2>
+
+      <div class="input-group">
+        <label>From:</label>
+        <select>
+          <option>BTC</option>
+        </select>
+      </div>
+
+      <div class="input-group">
+        <label>Amount (BTC)</label>
+        <input class="inputswap" type="number" id="btcAmount" placeholder="0.00">
+      </div>
+
+      <div class="input-group">
+        <label>To:</label>
+        <select>
+          <option>USD</option>
+        </select>
+      </div>
+
+      <div class="input-group">
+        <label>Result (USD)</label>
+        <input class="inputswap" id="usdResult" placeholder="0.00">
+      </div>
+      <br>
+      <button class="swap-btn" id="swapBtn">Swap</button>
+    </div>
+   
+  </div>
+    </span>
+  <!-- swap-box && display  exchange status box end-->
+
+    <!--All chart display -->
+<!-- <span >
+
+</span>
+   -->
+
+            <!-- plans for btc movement -->
+ <div class="chart" id="main" style="height:55vh; display: none;">
+ 
+  </div>  
+
+
+
+  <li> <!-- FOOTER -->
+  <!-- <ul> -->
+    
+    <li >
+        <br>
+    
+       <div class="year-bar" >
+    <div class="footer2 li" id='charts'>Charts&#9650;</div>
+    <div class="footer2 li" id="">Plan</div>
+    <div class="footer2 li" id="Swap">Swap</div>
+    <div class="footer2 li" >Invest</div>
+    <div class="footer2 li" >Sell</div>
+    <div onclick="navback()" class="footer2 navback" >&#9664;</div>
+  </div>
+  </div>
+      
+     </li>
+  <!-- </ul> -->
+</li>
+</div>
+
+
+
+  <!-- buying more data or Rechargecard @ input Volume or Amount -->
+ <div class="moredatacarddiv" style="display:none ;">
+    
+  <h2>Create Account you are welcome</h2>
+    <label>Email Address</label>
+    <input type="number" id="data&card">
+ 
+  <button class="btn" onclick="submitForm()">Create Account</button>
+     <br>
+     <br>
+     <br>
+     <br>
+     <br>
+     
+<button class="navback" onclick="navback()" style="width: 30%; background: gray; cursor: pointer;">&#9664;</button>
+  </div>
+
+
+
+      <!-- homepage -->
+ <!-- <div class="homepagesection" style="display: none;"> -->
+<!-- drop down as in sub menu for all  -->
+<div id="AllSub_menu" class="DropDownMenu">
+
+
+</div>
+<!-- <div id="AllSub_menu" class="DropDownMenu">
+  <a href="#">Sign </a>
+  <a href="#">Invest </a>
+  <a href="#">Invest</a>
+  <a href="#">Withdraw</a>
+  <a href="#">Deposit</a>
+  <a href="#">Sms</a>
+  <a href="#">BuyVoucher</a>
+  <a href="#">RedeemVoucher</a>
+  <a href="#">Buy Goods</a>
+  <a href="#">Invested & Plans</a>
+</div> -->
+
+
+
+
+
+<!-- ===== SIDE NAV ===== -->
+<div id="mySidenav" class="sidenav" style="display:none;">
+  <li style="list-style:none; background:green; color:aqua; text-align:center; border-radius:2pc;">
+    Error Selection
+  </li>
+    <span class="closebtn" onclick="sidebar.close()">&times;</span>
+  <!-- <a href="#">Sign Agreement</a> -->
+  <a class="Invest">Invest</a>
+  <!-- <a href="#">Invest Usd</a> -->
+  <a class="Withdraw">Withdraw To</a>
+  <a class="Deposit">Deposit</a>
+  <a class="smsfriends">Sms Friends</a>
+  <a class="BuyVoucher">Buy Voucher</a>
+ <br>
+  <a class="RedeemVoucher">Redeem Voucher</a>
+<br>
+  <a class="buygoods">Buy Goods</a>
+  <a class="Invested&plans">Invested & Plans</a>
+  <a  ><li style="list-style:none;  color: green;">Bal:$<br>Bal:N </li></a>
+</div>
+
+<!-- ===== MAIN CONTAINER ===== -->
+<div class="container" style="display:none;">
+
+  <!-- SERVICES INFO -->
+  <div class="services">
+    <div id="errornoticefy" class="cell " style="color:blue; text-align: center;">  Services
+    </div>
+  <span onclick="sidebar.open()"  class="openbtn" style="color:blue;"> ≡ </span> 
+  </div>
+
+  <div class="usdtinfo cell" style="background:aqua; border-color: aqua; color:;">
+    <li id="transactionsdetails" class="li">20/1/2026 10:30am — 3000 USDT @ N2500 ▼</li>
+  </div>
+
+  <div class="btcinfo " style="margin: auto;">
+   
+      <!-- <li class="cell"><a onclick="sidebar.open()" class="openbtn">≡</a></li>
+     -->
+    
+  <!-- 
+     <li class="cell">$Usdt/₦Ngn</li> -->
+      <li style=" text-indent:-50%; text-align:right;" id="giftcard" class="cell li">🎁Gift Card▼</li>
+  <li id="convertcurrency" class="cell li" style="transform: translateX(100%)translateY(-100%);">Convert▼</li> 
+    </div>
+
+  <!-- TOP ICONS -->
+  <ul class="grid topicons" style="transform: translateX(50px); grid-template-columns: repeat(6,90px); width:90%; font-size:small; background: aqua;">
+   <li style="text-align: center;" id="internetdata" class="cell li">📊Data▼</li>
+   
+  
+    <li style="text-align:center;" class="cell li" id="Rechargecard">💳Card▼</li>
+  </ul>
+  <!-- TOP ICONS -->
+  
+
+  <!-- Card -->
+  <ul class="grid " style="width: 70%; margin: auto;">
+    <li class="cell"></li>
+     <li class="cell Rechargecardproviders "style="color:blue; text-decoration:underline; text-align: left;">glo card</li>
+    <li class="cell"></li>
+   
+    <li class="cell"></li>
+    <li class="cell"></li>
+
+  
+    <li class="cell">N100</li>
+    <li class="cell">N200</li>
+    <li class="cell">N300</li>
+    <li class="cell">N400</li>
+    <li class="cell"></li>
+
+    <li class="cell">N500</li>
+    <li class="cell">N600</li>
+    <li class="cell li" id="moreRechargecard">more</li>
+    <li class="cell"></li>
+
+    <li class="cell"></li>
+    <li class="cell"></li>
+    <li class="cell"></li>
+    <li class="cell"></li>
+    <li class="cell"></li>
+  </ul>
+
+  <!-- DATA  -->
+  <ul class="grid datacard" style="width: 70%; margin: auto;">
+    <li class="cell"></li>
+     <li class="cell dataproviders" style="color:blue; text-decoration:underline;">glo data</li>
+    
+    <li class="cell"></li>
+   <li class="cell"></li>
+    <li class="cell"></li>
+
+    <li class="cell">N100</li>
+    <li class="cell">N200</li>
+    <li class="cell">N300</li>
+    <li class="cell">N400</li>
+    <li class="cell"></li>
+
+    <li class="cell">N500</li>
+    <li class="cell">N600</li>
+    <li class="cell li" id="moreinternetdata">more</li>
+    <li class="cell"></li>
+
+    <li class="cell"></li>
+    <li class="cell"></li>
+    <li class="cell"></li>
+    <li class="cell"></li>
+    <li class="cell"></li>
+  </ul>
+
+  <!-- FOOTER -->
+  <ul class="list-parent" style="width: 50%;">
+    <!-- <li>⋯More</li> -->
+    <li>📞Contact</li>
+    <!-- <li>⚙️Settings</li> -->
+    <li>⏏ Logout</li>
+    <li>↺ Reset</li>
+    <li>❓ Help</li>
+  </ul>
+
+
+
+
+</div>
+      <!-- chart -->
+      <script type="text/javascript" src="https://s3.tradingview.com/tv.js">
+
+       // let p = `FX_IDC:USDNGN`;//FX_IDC:USDNGN  store
+      </script>
+  
+
+      <script type="text/javascript">
+    widget = new TradingView.widget(
+      {
+        "autosize": true,
+        "symbol":`Bybit:btcusdt`,
+        "interval": "1",
+        "timezone": "Etc/UTC",
+        "theme": "dark",
+        "style": "1",
+        "locale": "en",
+        "toolbar_bg": "#f1f3f6",
+        "enable_publishing": true,
+        "withdateranges": true,
+        "hide_side_toolbar": false,
+        "allow_symbol_change": true,
+        "details": true,
+        "hotlist": true,
+        "calendar": true,
+        "container_id": "main"
+      }
+    );
+
+  </script>
+
+
+
+
+<script>
+ 
+let asignYrsNum = ['0', '1', '2', '3'] //BTC Having 4 Years Numbers
+
+
+
+//switch homepage body css ON
+  // document.addEventListener('DOMContentLoaded',function() {  
+  //   document.querySelector('#AllTagsContent').className = 'bodyothers'
+  //   document.querySelector('.sidenav').style.display = 'block'
+  //   document.querySelector('.container').style.display = 'flex'
+  
+  // })
+
+
+
+
+  // ===== ENCAPSULATED JAVASCRIPT =====
+  class Sidebar {
+    constructor(id) {
+      this.el = document.getElementById(id);
+    }
+    open() {
+      this.el.style.width = "250px";
+ document.getElementById('AllSub_menu').style.display ='none'
+  
+    }
+    close() {
+      this.el.style.width = "0";
+    }
+  }
+
+  const sidebar = new Sidebar("mySidenav");
+
+
+//testing
+  document.addEventListener('DOMContentLoaded',function() {
+   // document.querySelector('#AllTagsContent').className = 'bodyexchange'
+    // document.querySelector('#AllTagsContent').className = 'bodyexchange'
+    // document.querySelector('.sidenav').style.display = 'none'
+    // document.querySelector('.container').style.display = 'none'
+    // document.querySelector('.swap-box ').style.display = 'block'
+
+  document.querySelector('#AllTagsContent').className = 'bodyothers'
+
+    // //chart
+    // document.querySelector('.chart').style.display = 'block'
+    // document.querySelector('.stats-box').style.display = 'none'
+
+    // document.querySelector('.swap-inputs').style.display = 'none'
+
+
+  
+let file = {username:`AbC@1`}  
+fetch( 'http://localhost:3000/CurrencyExchange', {   // 'Abc@1233' Abc@1217
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+   body: JSON.stringify(file)
+})
+.then(res => res.json())
+.then(data =>{ 
+console.log('Response:', data)
+
+if (`${data}`.length > 0) {
+ const d = data.ResToUsers
+   for(let n = 0; n < 4; n++) {
+
+    const asignBtcYrs = document.querySelector(`.Year${n}`).innerText = `${d.lasthaving+n}`;
+     console.log(d.lasthaving, parseInt(asignBtcYrs), parseInt(d.currentyear) )
+    if(parseInt(asignBtcYrs) === parseInt(d.currentyear)){//check for btc current year out of, 'BTC Having' 4 years to be fulfilled  
+     document.querySelector(`.Year${n}`).innerHTML = `&#9654;${d.lasthaving+n}`;
+    document.querySelector(`.Year${d.countbtcyrsofhaving}`).classList.add('traficating')
+   
+      const checkForTheOneNeedToComentON = document.querySelector(`.Year${d.countbtcyrsofhaving}`)
+      const NowSellOffPrice = document.getElementById('selloff').innerHTML=`From ${d.sellofPrice1}<br>To ${d.sellOfPrice2}`
+      document.getElementById('lastendedHighestprice').innerText =`${d.sellOfPrice2}`
+     const LastHavingMaxPriceLow = document.getElementById('lastendlowprice').innerText =`${d.LastLowestprice}`
+     const BtcNowReachHeigt = document.getElementById('nowhighprice').innerText =`${d.BtcJustIncreaseTo}`//the pick reached in this having
+     document.querySelector('.LastHavingPriceHight').innerText = `${d.Formal4yrsHighestpriceYrs} BTC High @`   
+     document.querySelector('.LastHavingPriceLow').innerText = `${d.Formal4yrslowestpriceYrs} BTC Low @`
+  
+   //Below are Btc 4 yrs 'Having' digonising using classname
+      const ConvertToArray =  [...checkForTheOneNeedToComentON.classList]
+   const DigoniseClassname = ConvertToArray.find(f => f !== 'BtcHavingIdentify').toString()
+//console.log('class', DigoniseClassname)
+const noticebox = document.querySelector('.welcome-text')   
+const year1 = document.querySelector('.Year0')   
+const year2 = document.querySelector('.Year1')   
+const year3 = document.querySelector('.Year2')   
+const year4 = document.querySelector('.Year3')   
+
+switch (DigoniseClassname){//Btc 4 yrs 'Having' is digonised using classname
+    
+   case 'Year0':  //1st year out of 4 yrs of Btc 'Having' is digonised 
+     noticebox.innerText = `It's expect BTC will reach more than ${d.sellofPrice1} btw ${year1.textContent} & ${year2.textContent} ending` 
+   
+      break;
+   
+    case 'Year1'://2nd year out of 4 yrs of Btc 'Having' is digonised 
+
+    if(BtcNowReachHeigt >= d.sellofPrice1){
+  noticebox.innerText = `BTC reach alt time height this year ${year2.textContent}. Work as Planned` 
+}else{
+   noticebox.innerText = `It's expect BTC will reach ${d.sellofPrice1} b'4 dis year ${year2.textContent} ending` 
+   
+}
+      break;
+   
+    case 'Year2'://3rd year out of 4 yrs of Btc 'Having' is digonised 
+
+       if(BtcNowReachHeigt >= d.sellofPrice1){
+     noticebox.innerText = `It's expect Btc will move up more than ${year3.textContent} while some alt coin droped.` 
+
+    }else{
+
+   noticebox.innerText = `BTC didn't reach sell Off price. Now sell Off is: ${d.BtcJustIncreaselowprice} To ${d.BtcJustIncreaseTo} b'4 ${year3.textContent} ending` 
+  
+   document.getElementById('selloff').innerHTML= `From ${d.BtcJustIncreaseTo}<br>To ${d.BtcJustIncreaselowprice}`
+}
+
+      break;
+   
+    case 'Year3'://4th year out of 4 yrs of Btc 'Having' is digonised 
+      noticebox.innerText = `It's expect, BTC will move up & down finalizing, dropping & completing it Having Years` 
+
+      break;
+   
+    default:
+      break;
+   } //Below are Btc 4 yrs 'Having' digonising using classname end
+      //currentyear
+      
+    }
+  }
+}    
+  }).catch(err => console.error('Fetch error:', err));
+
+} )
+
+
+
+/* ===== Prevent copy, cut, paste, right click ===== */
+// document.addEventListener("contextmenu", e => e.preventDefault());
+// document.addEventListener("copy", e => e.preventDefault());
+// document.addEventListener("cut", e => e.preventDefault());
+// document.addEventListener("paste", e => e.preventDefault());
+
+
+
+// giftcard
+// index.html:378 convertcurrency
+// index.html:378 internetdata
+// index.html:378 Rechargecard
+// index.html:378 moreRechargecard
+// index.html:378 moreinternetdata
+// index.html:378 
+// index.html:378 transactionsdetails
+
+
+
+//   class="bodyexchange bodyothers"
+// giftcarddiv
+// swap-box moredatacarddiv
+// homepagesection
+
+
+/* transactions details */
+    /* top:16%;
+    left:20%; */
+
+    /* data & card */
+    /* top:41%;
+    left:23%; */
+
+    /* gift card & convert */
+    /* left:30%; 
+    top:28%; */
+// Rechargecardproviders 
+
+/* ===== All Sub_Menu Actions :. DropDown Menu ===== */
+ document.querySelectorAll(".li").forEach(e =>{  
+   e.onclick = () => {
+  const keypress = e.id.toString()
+
+   const checkIfEmpty = [...document.querySelectorAll('.Sub_menu')].length
+   if(checkIfEmpty > 1){
+  document.getElementById('AllSub_menu').innerHTML = ''  
+  }
+
+   if(document.getElementById('AllSub_menu').style.display === 'block'){
+   document.getElementById('AllSub_menu').style.display ='none'
+   return
+   }
+
+//document.getElementById('AllSub_menu').style.display = 'block'
+  switch (keypress) {
+    case 'giftcard':
+    var giftcards = ['apple', 'google', 'amazon', 'walmart', 'ebay', 'itune', 'netflix']
+    giftcards.forEach(g => {
+ const li_giftcard = document.createElement('a')
+ li_giftcard.textContent = g
+ li_giftcard.className = `Sub_menu  giftcard`
+li_giftcard.setAttribute('onclick', 'clicked(this)')
+ const checkIfAlreadyAdded = [...document.querySelectorAll('.Sub_menu')].some(s => s.textContent.includes(`${g}`))
+  console.log(li_giftcard, checkIfAlreadyAdded)
+  if(checkIfAlreadyAdded === false){
+ document.getElementById('AllSub_menu').appendChild(li_giftcard)
+    document.getElementById('AllSub_menu').style.left = '30%'
+      document.getElementById('AllSub_menu').style.top = '30%'
+      document.getElementById('AllSub_menu').style.display = 'block'
+      //  document.getElementById('DropDownMenu').style.scrollY = 'auto'
+        console.log(keypress)
+  }   
+})
+        break;
+    case 'convertcurrency':
+      document.querySelector('#AllTagsContent').className = 'bodyexchange'
+    var currency = ['Btc/Ngn', '$Usdt/₦Ngn']
+    currency.forEach(g => {
+ const li_currency = document.createElement('a')
+ li_currency.textContent = g
+ li_currency.className = `Sub_menu  convertcurrency`
+ li_currency.style.fontSize = 'medium'
+ li_currency.setAttribute('onclick', 'clicked(this)')
+ const checkIfAlreadyAdded2 = [...document.querySelectorAll('.Sub_menu')].some(s => s.textContent.includes(`${g}`))
+  console.log(li_currency, checkIfAlreadyAdded2)
+  if(checkIfAlreadyAdded2 === false){
+ document.getElementById('AllSub_menu').appendChild(li_currency)
+    document.getElementById('AllSub_menu').style.left = '30%'
+      document.getElementById('AllSub_menu').style.top = '30%'
+      document.getElementById('AllSub_menu').style.display = 'block'
+      //  document.getElementById('DropDownMenu').style.scrollY = 'auto'
+        console.log(keypress)
+  }   
+      })
+
+
+      break;
+    case 'internetdata':
+      
+    var currency = ['mtn data', 'airtel data', 'glo data']
+    currency.forEach(g => {
+ const li_data = document.createElement('p')
+ li_data.textContent = g
+ li_data.className = `Sub_menu  internetdata`
+ li_data.style.textAlign = 'center'
+ li_data.setAttribute('onclick', 'clicked(this)')
+//  li_currency.style.fontSize = 'medium'
+ const checkIfAlreadyAdded3 = [...document.querySelectorAll('.Sub_menu')].some(s => s.textContent.includes(`${g}`))
+  console.log(li_data, checkIfAlreadyAdded3)
+  if(checkIfAlreadyAdded3 === false){
+     /* top:41%;
+    left:23%; */
+ document.getElementById('AllSub_menu').appendChild(li_data)
+    document.getElementById('AllSub_menu').style.left = '23%'
+      document.getElementById('AllSub_menu').style.top = '41.9%'
+      document.getElementById('AllSub_menu').style.display = 'block'
+      // document.querySelector('dataproviders').style.scrollY = `${g}`
+        console.log(keypress)
+  }   
+      })
+
+      break;
+    case 'Rechargecard':
+               
+    var currency = ['mtn card', 'airtel card', 'glo card']
+    currency.forEach(g => {
+ const li_data = document.createElement('p')
+ li_data.textContent = g
+ li_data.className = `Sub_menu  Rechargecard`
+ li_data.style.textAlign = 'center'
+ li_data.setAttribute('onclick', 'clicked(this)')
+//  li_currency.style.fontSize = 'medium'
+ const checkIfAlreadyAdded3 = [...document.querySelectorAll('.Sub_menu')].some(s => s.textContent.includes(`${g}`))
+  console.log(li_data, checkIfAlreadyAdded3)
+  if(checkIfAlreadyAdded3 === false){
+     /* top:41%;
+    left:23%; */
+ document.getElementById('AllSub_menu').appendChild(li_data)
+    document.getElementById('AllSub_menu').style.left = '23%'
+      document.getElementById('AllSub_menu').style.top = '41.9%'
+      document.getElementById('AllSub_menu').style.display = 'block'
+      // document.querySelector('dataproviders').style.scrollY = `${g}`
+        console.log(keypress)
+  }   
+      })
+
+
+      break;
+    case 'moreRechargecard':     
+
+    document.querySelector('#AllTagsContent').className = 'bodyothers'
+    document.querySelector('.sidenav').style.display = 'none'
+    document.querySelector('.container').style.display = 'none'
+ 
+    document.querySelector('.moredatacarddiv').style.display = 'block'
+ 
+      break;
+    case 'moreinternetdata':
+      
+ 
+    document.querySelector('#AllTagsContent').className = 'bodyothers'
+    document.querySelector('.sidenav').style.display = 'none'
+    document.querySelector('.container').style.display = 'none'
+ 
+    document.querySelector('.moredatacarddiv').style.display = 'block'
+ 
+
+
+      break;
+  
+    case 'transactionsdetails':
+ 
+       var transactions = ['app99994', 'hgfhyryy',   'hhhdhhdhdh', 'jjdjdjjd', 'jdhdhdh']
+    transactions.forEach(g => {
+ const li_transaction = document.createElement('a')
+ li_transaction.textContent = g
+ li_transaction.className = `Sub_menu  transactionsdetails`
+ li_transaction.setAttribute('onclick', 'clicked(this)')
+ const checkIfAlreadyAdded4 = [...document.querySelectorAll('.Sub_menu')].some(s => s.textContent.includes(`${g}`))
+  console.log(li_transaction, checkIfAlreadyAdded4)
+  if(checkIfAlreadyAdded4 === false){
+ document.getElementById('AllSub_menu').appendChild(li_transaction)
+    document.getElementById('AllSub_menu').style.left = '20%'
+      document.getElementById('AllSub_menu').style.top = '16%'
+      document.getElementById('AllSub_menu').style.display = 'block'
+      //  document.getElementById('DropDownMenu').style.scrollY = 'auto'
+        console.log(keypress)
+  }   
+})
+
+  /* top:16%;
+    left:20%; */
+      break;
+  
+    case 'internetdata':
+      
+    var currency = ['mtn data', 'airtel data', 'glo data']
+    currency.forEach(g => {
+ const li_data = document.createElement('p')
+ li_data.textContent = g
+ li_data.className = `Sub_menu  internetdata`
+ li_data.style.textAlign = 'center'
+ li_data.setAttribute('onclick', 'clicked(this)')
+//  li_currency.style.fontSize = 'medium'
+ const checkIfAlreadyAdded3 = [...document.querySelectorAll('.Sub_menu')].some(s => s.textContent.includes(`${g}`))
+  console.log(li_data, checkIfAlreadyAdded3)
+  if(checkIfAlreadyAdded3 === false){
+     /* top:41%;
+    left:23%; */
+ document.getElementById('AllSub_menu').appendChild(li_data)
+    document.getElementById('AllSub_menu').style.left = '23%'
+      document.getElementById('AllSub_menu').style.top = '41.9%'
+      document.getElementById('AllSub_menu').style.display = 'block'
+      // document.querySelector('dataproviders').style.scrollY = `${g}`
+        console.log(keypress)
+  }   
+      })
+
+      break;
+    case 'Rechargecard':
+               
+    var currency = ['mtn card', 'airtel card', 'glo card']
+    currency.forEach(g => {
+ const li_data = document.createElement('p')
+ li_data.textContent = g
+ li_data.className = `Sub_menu  Rechargecard`
+ li_data.style.textAlign = 'center'
+ li_data.setAttribute('onclick', 'clicked(this)')
+//  li_currency.style.fontSize = 'medium'
+ const checkIfAlreadyAdded3 = [...document.querySelectorAll('.Sub_menu')].some(s => s.textContent.includes(`${g}`))
+  console.log(li_data, checkIfAlreadyAdded3)
+  if(checkIfAlreadyAdded3 === false){
+     /* top:41%;
+    left:23%; */
+ document.getElementById('AllSub_menu').appendChild(li_data)
+    document.getElementById('AllSub_menu').style.left = '20%'
+      document.getElementById('AllSub_menu').style.top = '56%'
+      document.getElementById('AllSub_menu').style.display = 'block'
+        console.log(keypress)
+  }   
+      })
+
+
+  break;
+
+case 'charts':
+      var charts = ["BYBIT:solusdt", "BYBIT:Adausdt"]
+  charts.forEach(g => {
+ const li_charts = document.createElement('a')
+ li_charts.textContent = g
+ li_charts.className = `Sub_menu  charts`
+ li_charts.style.fontSize = 'medium'
+ li_charts.setAttribute('onclick', 'clicked(this)')
+ const checkIfAlreadyAdded2 = [...document.querySelectorAll('.Sub_menu')].some(s => s.textContent.includes(`${g}`))
+  console.log(li_charts, checkIfAlreadyAdded2)
+  if(checkIfAlreadyAdded2 === false){
+ document.getElementById('AllSub_menu').appendChild(li_charts)
+    document.getElementById('AllSub_menu').style.left = '22%'
+      document.getElementById('AllSub_menu').style.top = '55%'
+      document.getElementById('AllSub_menu').style.display = 'block'
+      //  document.getElementById('DropDownMenu').style.scrollY = 'auto'
+        console.log(keypress)
+  }   
+      })
+
+      break;
+
+case 'Swap':
+
+    document.querySelector('.stats-box').style.display = 'block'
+    document.querySelector('.swap-inputs').style.display = 'block'
+   document.getElementById('AllSub_menu').style.display ='none'
+   document.querySelector('.chart').style.display = 'none'  
+        console.log(keypress)
+      break;
+
+  default:
+      break;
+  
+ }
+
+
+ }} )
+
+
+
+
+// case 'charts':
+//       var currency = ['Btc/Ngn', '$Usdt/₦Ngn']
+//     currency.forEach(g => {
+//  const li_currency = document.createElement('a')
+//  li_currency.textContent = g
+//  li_currency.className = `Sub_menu  convertcurrency`
+//  li_currency.style.fontSize = 'medium'
+//  li_currency.setAttribute('onclick', 'clicked(this)')
+//  const checkIfAlreadyAdded2 = [...document.querySelectorAll('.Sub_menu')].some(s => s.textContent.includes(`${g}`))
+//   console.log(li_currency, checkIfAlreadyAdded2)
+//   if(checkIfAlreadyAdded2 === false){
+//  document.getElementById('AllSub_menu').appendChild(li_currency)
+//     document.getElementById('AllSub_menu').style.left = '30%'
+//       document.getElementById('AllSub_menu').style.top = '30%'
+//       document.getElementById('AllSub_menu').style.display = 'block'
+//       //  document.getElementById('DropDownMenu').style.scrollY = 'auto'
+//         console.log(keypress)
+//   }   
+//       })
+
+
+//       break;
+
+
+
+
+// sidenav functions
+
+// Invest
+// index.html:965 Withdraw
+// index.html:965 Deposit
+// index.html:965 smsfriends
+// index.html:965 BuyVoucher
+// index.html:965 RedeemVoucher
+// index.html:965 buygoods
+// index.html:965 Invested&plans
+
+//swap-box 
+//giftcarddiv
+//bodyexchange
+
+
+
+document.querySelectorAll("a").forEach(e =>{  
+   e.onclick = () => {
+  const SideNavkeyspress = e.className.toString()
+  console.log(SideNavkeyspress)
+console.log(e.classList)
+switch (SideNavkeyspress) {
+  case 'Invest':
+     document.querySelector('#AllTagsContent').className = 'bodyexchange'
+    document.querySelector('.sidenav').style.display = 'none'
+    document.querySelector('.container').style.display = 'none'
+ 
+    document.querySelector('.swap-box ').style.display = 'block'
+ 
+    break;
+  case 'Withdraw':
+     document.querySelector('#AllTagsContent').className = 'bodyothers'
+    document.querySelector('.sidenav').style.display = 'none'
+    document.querySelector('.container').style.display = 'none'
+ 
+    document.querySelector('.moredatacarddiv').style.display = 'block'
+ 
+    break;
+  case 'Deposit':
+      document.querySelector('#AllTagsContent').className = 'bodyothers'
+    document.querySelector('.sidenav').style.display = 'none'
+    document.querySelector('.container').style.display = 'none'
+ 
+    document.querySelector('.moredatacarddiv').style.display = 'block'
+ 
+
+    break;
+  case 'smsfriends':
+          document.querySelector('#AllTagsContent').className = 'bodyothers'
+    document.querySelector('.sidenav').style.display = 'none'
+    document.querySelector('.container').style.display = 'none'
+ 
+    document.querySelector('.giftcarddiv').style.display = 'block'
+   
+    break;
+  case 'BuyVoucher':
+          document.querySelector('#AllTagsContent').className = 'bodyothers'
+    document.querySelector('.sidenav').style.display = 'none'
+    document.querySelector('.container').style.display = 'none'
+ 
+    document.querySelector('.giftcarddiv').style.display = 'block'
+   
+    break;
+  case 'RedeemVoucher':
+          document.querySelector('#AllTagsContent').className = 'bodyothers'
+    document.querySelector('.sidenav').style.display = 'none'
+    document.querySelector('.container').style.display = 'none'
+ 
+    document.querySelector('.giftcarddiv').style.display = 'block'
+   
+    break;
+  case 'buygoods':
+      document.querySelector('#AllTagsContent').className = 'bodyothers'
+    document.querySelector('.sidenav').style.display = 'none'
+    document.querySelector('.container').style.display = 'none'
+ 
+    document.querySelector('.moredatacarddiv').style.display = 'block'
+ 
+  break;
+ 
+    case 'Invested&plans':
+         document.querySelector('#AllTagsContent').className = 'bodyexchange'
+    document.querySelector('.sidenav').style.display = 'none'
+    document.querySelector('.container').style.display = 'none'
+ 
+    document.querySelector('.swap-box ').style.display = 'block'
+ 
+    break;
+  
+  default:
+    break;
+}
+   
+document.getElementById("mySidenav").style.width = '0'   
+
+}
+   })
+
+
+
+
+
+//when sub_menu innerHTML is clicked
+function clicked(keyPr){
+  document.querySelectorAll('.Sub_menu').forEach(f =>{  
+ if(keyPr){
+
+   const functionsub_menu =  [...f.classList]
+   const findclassnametype = functionsub_menu.find(f => f !== 'Sub_menu')
+
+
+switch (findclassnametype){
+  case 'giftcard':
+      document.getElementById('AllSub_menu').style.display ='none'
+           document.querySelector('#AllTagsContent').className = 'bodyothers'
+    document.querySelector('.sidenav').style.display = 'none'
+    document.querySelector('.container').style.display = 'none'
+    document.querySelector('.giftcarddiv').style.display = 'block'
+    break;
+  case 'convertcurrency':
+    document.querySelector('#AllTagsContent').className = 'bodyexchange'
+    document.querySelector('.sidenav').style.display = 'none'
+    document.querySelector('.container').style.display = 'none'
+    document.querySelector('.swap-box ').style.display = 'block'
+    document.getElementById('AllSub_menu').style.display ='block'
+    break;
+    
+    case 'internetdata':
+    document.querySelector('.dataproviders').innerText = `${keyPr.textContent}`   
+      document.getElementById('AllSub_menu').style.display ='none'
+      break;
+    
+    case 'Rechargecard':
+        document.querySelector('.Rechargecardproviders ').innerText = `${keyPr.textContent}` 
+      document.getElementById('AllSub_menu').style.display ='none'
+      break;
+
+
+    case 'charts':
+    document.querySelector('.stats-box').style.display = 'none'
+    document.querySelector('.swap-inputs').style.display = 'none'
+   document.getElementById('AllSub_menu').style.display ='none'
+   document.querySelector('.chart').style.display = 'block'   
+   break;
+
+  default:
+    break;
+    document.getElementById('AllSub_menu').style.display ='none'
+}  
+  
+      //console.log('text', f.textContent)
+}
+})
+}
+
+
+
+
+
+//Switch to home page
+// const backbtn = document.querySelector('.navback')
+ function navback() {
+        // document.querySelector('body').className = 'bodyexchange'
+    document.querySelector('.giftcarddiv').style.display = 'none'
+ document.querySelector('.swap-box ').style.display = 'none'
+   document.querySelector('#AllTagsContent').className = 'bodyothers'
+  document.querySelector('.sidenav').style.display = 'block'
+    document.querySelector('.container').style.display = 'flex'
+ document.querySelector('.moredatacarddiv').style.display = 'none'
+  
+}  
+
+
+</script>
+</body>
+</html>
+
+
+
