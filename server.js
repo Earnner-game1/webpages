@@ -1420,10 +1420,12 @@ app.post('/CurrencyExchange', (req, res) => {
     // BtcTradedLowestPriceTimestamp: null,
     // SOL:null
  //  BtcHavingFormalYearEnded:`2023`
-                 console.log(highestprice)
-     ResToUsers = { username: data[0].UserName, lasthaving:data[0].BtcHavingFormalYearEnded, currentyear:UseLatestDate.yearprice, countbtcyrsofhaving:BtcHavingYearCount, sellOfPrice2:data[0].LastHighestTrade, sellofPrice1:data[0].Formal4yrsHighestLowPrice, LastLowestprice:data[0].LastLowestTrade, BtcJustIncreaseTo:highestprice.HighestPrices, BtcJustIncreaselowprice:highestprice.lowprice, Formal4yrsHighestpriceYrs:data[0].FormalHavingBtcHighPriceYear, Formal4yrslowestpriceYrs:data[0].FormalHavingBtcLowestPriceYear}//store data to response back to user 
+const nowHavingHigh = latestyrsprice.filter(f => f.timestamp >= data[0].BtcTradedLowestPriceTimestamp)
+const NowMaxHigh = Math.max(...nowHavingHigh.map(h => h.HighestPrices))
+//console.log('now high',NowMaxHigh)  
+ResToUsers = { username:data[0].UserName, lasthaving:data[0].BtcHavingFormalYearEnded, currentyear:UseLatestDate.yearprice, countbtcyrsofhaving:BtcHavingYearCount, sellOfPrice2:data[0].LastHighestTrade, sellofPrice1:data[0].Formal4yrsHighestLowPrice, LastLowestprice:data[0].LastLowestTrade, BtcJustIncreaseTo:NowMaxHigh, BtcJustIncreaselowprice:highestprice.lowprice, Formal4yrsHighestpriceYrs:data[0].FormalHavingBtcHighPriceYear, Formal4yrslowestpriceYrs:data[0].FormalHavingBtcLowestPriceYear}//store data to response back to user 
               //console.log('rep',ResToUsers)
-                 
+            
 
               switch (BtcHavingYearCount) {//Track 4yrs BTC circle complete and it droping 
 
@@ -1581,3 +1583,4 @@ server.listen(3000, () => {
   // console.log(process.env.FLW_SECRET_KEY)
   console.log('Server is running on port 3000');
 });
+
